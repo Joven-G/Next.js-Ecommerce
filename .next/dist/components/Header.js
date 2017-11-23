@@ -156,7 +156,7 @@ var Header = function (_React$Component) {
           fileName: _jsxFileName,
           lineNumber: 79
         }
-      }, _react2.default.createElement(_reactBootstrap.NavItem, { eventKey: 3, href: '#', __source: {
+      }, _react2.default.createElement(_reactBootstrap.NavItem, { eventKey: 3, href: '/carrinho', __source: {
           fileName: _jsxFileName,
           lineNumber: 80
         }
