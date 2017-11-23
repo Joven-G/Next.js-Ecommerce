@@ -9,8 +9,8 @@ export default class GridProduto extends React.Component {
 
   render() {
       const rows = this.props.produtos.reduce((prev, item, i) => {
-        const where = Math.floor(i / 3);
-        const isNew = i === 0 || i % 3 === 0;
+        const where = Math.floor(i / 4);
+        const isNew = i === 0 || i % 4 === 0;
         if (isNew) {
           prev.push([item]);
         } else {
@@ -27,7 +27,7 @@ export default class GridProduto extends React.Component {
           {
             rows.map((row) => <Row className="show-grid">
               {
-                row.map((produto) => <Col sm={0} md={4}>
+                row.map((produto) => <Col sm={0} md={3}>
                     <Thumbnail src={produto.img[0]} alt={produto.name}>
                       <h3>{produto.name}</h3>
                       <p>{produto.description}</p>
