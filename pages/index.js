@@ -1,5 +1,8 @@
-import Layout from '../components/MyLayout.js'
+import { Button } from 'react-bootstrap';
 import Link from 'next/link'
+
+import Layout from '../components/MyLayout.js'
+import GridLayout from '../components/MyGrid.js'
 
 function getPosts () {
   return [
@@ -34,35 +37,29 @@ const PostLink = ({ post }) => (
 )
 
 export default () => (
-  <Layout>
-    <h1>My Blog</h1>
-    <ul>
-      {getPosts().map((post) => (
-        <PostLink key={post.id} post={post}/>
-      ))}
-    </ul>
-    <style jsx>{`
-      h1, a {
-        font-family: "Arial";
-      }
-
-      ul {
-        padding: 0;
-      }
-
-      li {
-        list-style: none;
-        margin: 5px 0;
-      }
-
-      a {
-        text-decoration: none;
-        color: blue;
-      }
-
-      a:hover {
-        opacity: 0.6;
-      }
-    `}</style>
-  </Layout>
+  <div>
+    <Layout>
+      <h1>Produtos em destaque:</h1>
+      <style jsx>{`
+        h1, a {
+          font-family: "Arial";
+        }
+        ul {
+          padding: 0;
+        }
+        li {
+          list-style: none;
+          margin: 5px 0;
+        }
+        a {
+          text-decoration: none;
+          color: blue;
+        }
+        a:hover {
+          opacity: 0.6;
+        }
+      `}</style>
+      <GridLayout />
+    </Layout>
+  </div>
 )
