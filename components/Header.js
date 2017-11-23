@@ -77,7 +77,7 @@ export default class Header extends React.Component {
                 {NavLogin}
                 {NavUsuario}
                 <Nav pullRight>
-                  <NavItem eventKey={3} href="#">Carrinho</NavItem>
+                  <NavItem eventKey={3} href="/carrinho">Carrinho</NavItem>
                 </Nav>
                 <FormProcurar />
               </Navbar>

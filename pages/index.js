@@ -36,12 +36,17 @@ const Index = (props) => (
 )
 
 Index.getInitialProps = async function() {
-  const data = await api.get('http://ec2-54-207-63-160.sa-east-1.compute.amazonaws.com:3000', 'products', { group: 'grupo6' });
+  const URL = 'http://ec2-54-207-63-160.sa-east-1.compute.amazonaws.com:3000'
+  const data = await api.get(URL, 'products', { group: 'grupo6' });
   console.log(data);
 
   return {
     produtos: data
   }
+
+  // return {
+  //   produtos: [{img:[], name:"oi", description:"Teste"}]
+  // }
 
   // const res = await fetch('https://api.tvmaze.com/search/shows?q=batman')
   // const data = await res.json()
