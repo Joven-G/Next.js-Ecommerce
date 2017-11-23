@@ -1,42 +1,13 @@
 import { Button } from 'react-bootstrap';
 import Link from 'next/link'
+import fetch from 'isomorphic-unfetch'
 
 import Layout from '../components/MyLayout.js'
 import GridLayout from '../components/MyGrid.js'
 
-function getPosts () {
-  return [
-    { id: 'hello-nextjs', title: 'Hello Next.js'},
-    { id: 'learn-nextjs', title: 'Learn Next.js is awesome'},
-    { id: 'deploy-nextjs', title: 'Deploy apps with ZEIT'},
-  ]
-}
+import api from '../utils/api';
 
-const PostLink = ({ post }) => (
-  <li>
-    <Link as={`/p/${post.id}`} href={`/post?title=${post.title}`}>
-      <a>{post.title}</a>
-    </Link>
-    <style jsx>{`
-      li {
-        list-style: none;
-        margin: 5px 0;
-      }
-
-      a {
-        text-decoration: none;
-        color: blue;
-        font-family: "Arial";
-      }
-
-      a:hover {
-        opacity: 0.6;
-      }
-    `}</style>
-  </li>
-)
-
-export default () => (
+const Index = (props) => (
   <div>
     <Layout>
       <h1>Produtos em destaque:</h1>
@@ -59,7 +30,27 @@ export default () => (
           opacity: 0.6;
         }
       `}</style>
-      <GridLayout />
+      <GridLayout produtos={props.produtos} />
     </Layout>
   </div>
 )
+
+Index.getInitialProps = async function() {
+  const data = await api.get('http://ec2-54-207-63-160.sa-east-1.compute.amazonaws.com:3000', 'products', { group: 'grupo6' });
+  console.log(data);
+
+  return {
+    produtos: data
+  }
+
+  // const res = await fetch('https://api.tvmaze.com/search/shows?q=batman')
+  // const data = await res.json()
+  //
+  // console.log(`Show data fetched. Count: ${data.length}`)
+  //
+  // return {
+  //   shows: data
+  // }
+}
+
+export default Index

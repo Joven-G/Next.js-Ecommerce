@@ -7,155 +7,39 @@ import { Image } from 'react-bootstrap';
 
 export default class GridProduto extends React.Component {
 
-  getProdutos() {
-      return [
-          'Lorem ipsum dolor sit amet, consectetuer adipiscing elit.',
-          'Donec hendrerit tempor tellus.',
-          'Donec pretium posuere tellus.'
-      ];
-  }
-
   render() {
-      var produtos = this.getProdutos();
-      var colunasM = 4;
-      var colunasS = 0;
+      const rows = this.props.produtos.reduce((prev, item, i) => {
+        const where = Math.floor(i / 3);
+        const isNew = i === 0 || i % 3 === 0;
+        if (isNew) {
+          prev.push([item]);
+        } else {
+          prev[where].push(item);
+        }
+        return prev;
+      }, []);
+
+
 
       return (
         <div>
-        <Grid bsClass='GridProduto' >
-          <Row className="show-grid">
-            <Col sm={colunasS} md={colunasM}>
-                <Thumbnail src="/assets/dados.jpg" alt="242x200">
-                  <h3>dados</h3>
-                  <p>{produtos[0]}</p>
-                  <p>
-                    <Button bsStyle="primary">Adicionar ao carrinho</Button>&nbsp;
-                    <Button bsStyle="default">Detalhes</Button>
-                  </p>
-                </Thumbnail>
-            </Col>
-
-            <Col sm={colunasS} md={colunasM}>
-                <Thumbnail src="/assets/dados.jpg" alt="242x200">
-                  <h3>dados</h3>
-                  <p>{produtos[0]}</p>
-                  <p>
-                    <Button bsStyle="primary">Adicionar ao carrinho</Button>&nbsp;
-                    <Button bsStyle="default">Detalhes</Button>
-                  </p>
-                </Thumbnail>
-            </Col>
-
-            <Col sm={colunasS} md={colunasM}>
-                <Thumbnail src="/assets/dados.jpg" alt="242x200">
-                  <h3>dados</h3>
-                  <p>{produtos[0]}</p>
-                  <p>
-                    <Button bsStyle="primary">Adicionar ao carrinho</Button>&nbsp;
-                    <Button bsStyle="default">Detalhes</Button>
-                  </p>
-                </Thumbnail>
-            </Col>
-
-          </Row>
-          <Row className="show-grid">
-
-          <Col sm={colunasS} md={colunasM}>
-              <Thumbnail src="/assets/dados.jpg" alt="242x200">
-                <h3>dados</h3>
-                <p>{produtos[0]}</p>
-                <p>
-                  <Button bsStyle="primary">Adicionar ao carrinho</Button>&nbsp;
-                  <Button bsStyle="default">Detalhes</Button>
-                </p>
-              </Thumbnail>
-          </Col>
-          <Col sm={colunasS} md={colunasM}>
-              <Thumbnail src="/assets/dados.jpg" alt="242x200">
-                <h3>dados</h3>
-                <p>{produtos[0]}</p>
-                <p>
-                  <Button bsStyle="primary">Adicionar ao carrinho</Button>&nbsp;
-                  <Button bsStyle="default">Detalhes</Button>
-                </p>
-              </Thumbnail>
-          </Col>
-          <Col sm={colunasS} md={colunasM}>
-              <Thumbnail src="/assets/dados.jpg" alt="242x200">
-                <h3>dados</h3>
-                <p>{produtos[0]}</p>
-                <p>
-                  <Button bsStyle="primary">Adicionar ao carrinho</Button>&nbsp;
-                  <Button bsStyle="default">Detalhes</Button>
-                </p>
-              </Thumbnail>
-          </Col>
-          </Row>
-
-          <Row className="show-grid">
-          <Col sm={colunasS} md={colunasM}>
-              <Thumbnail src="/assets/dados.jpg" alt="242x200">
-                <h3>dados</h3>
-                <p>{produtos[0]}</p>
-                <p>
-                  <Button bsStyle="primary">Adicionar ao carrinho</Button>&nbsp;
-                  <Button bsStyle="default">Detalhes</Button>
-                </p>
-              </Thumbnail>
-          </Col>
-          <Col sm={colunasS} md={colunasM}>
-              <Thumbnail src="/assets/dados.jpg" alt="242x200">
-                <h3>dados</h3>
-                <p>{produtos[0]}</p>
-                <p>
-                  <Button bsStyle="primary">Adicionar ao carrinho</Button>&nbsp;
-                  <Button bsStyle="default">Detalhes</Button>
-                </p>
-              </Thumbnail>
-          </Col>
-          <Col sm={colunasS} md={colunasM}>
-              <Thumbnail src="/assets/dados.jpg" alt="242x200">
-                <h3>dados</h3>
-                <p>{produtos[0]}</p>
-                <p>
-                  <Button bsStyle="primary">Adicionar ao carrinho</Button>&nbsp;
-                  <Button bsStyle="default">Detalhes</Button>
-                </p>
-              </Thumbnail>
-          </Col>
-          </Row>
-          <Row className="show-grid">
-          <Col sm={colunasS} md={colunasM}>
-              <Thumbnail src="/assets/dados.jpg" alt="242x200">
-                <h3>dados</h3>
-                <p>{produtos[0]}</p>
-                <p>
-                  <Button bsStyle="primary">Adicionar ao carrinho</Button>&nbsp;
-                  <Button bsStyle="default">Detalhes</Button>
-                </p>
-              </Thumbnail>
-          </Col>
-          <Col sm={colunasS} md={colunasM}>
-              <Thumbnail src="/assets/dados.jpg" alt="242x200">
-                <h3>dados</h3>
-                <p>{produtos[0]}</p>
-                <p>
-                  <Button bsStyle="primary">Adicionar ao carrinho</Button>&nbsp;
-                  <Button bsStyle="default">Detalhes</Button>
-                </p>
-              </Thumbnail>
-          </Col>
-          <Col sm={colunasS} md={colunasM}>
-              <Thumbnail src="/assets/dados.jpg" alt="242x200">
-                <h3>dados</h3>
-                <p>{produtos[0]}</p>
-                <p>
-                  <Button bsStyle="primary">Adicionar ao carrinho</Button>&nbsp;
-                  <Button bsStyle="default">Detalhes</Button>
-                </p>
-              </Thumbnail>
-          </Col>
-          </Row>
+        <Grid bsClass='GridProduto'>
+          {
+            rows.map((row) => <Row className="show-grid">
+              {
+                row.map((produto) => <Col sm={0} md={4}>
+                    <Thumbnail src={produto.img[0]} alt={produto.name}>
+                      <h3>{produto.name}</h3>
+                      <p>{produto.description}</p>
+                      <p>
+                        <Button bsStyle="primary">Adicionar ao carrinho</Button>&nbsp;
+                        <Button bsStyle="default">Detalhes</Button>
+                      </p>
+                    </Thumbnail>
+                </Col>)
+              }
+            </Row>)
+          }
         </Grid>
         </div>
       );
