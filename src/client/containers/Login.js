@@ -1,8 +1,10 @@
 import React from 'react';
 import { Button, ControlLabel, FormControl, FormGroup } from 'react-bootstrap';
+import { inject, observer } from 'mobx-react';
 
 import Layout from '../components/Layout';
 
+@inject('store') @observer
 export default class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -12,7 +14,8 @@ export default class Login extends React.Component {
 
     // Callback do botao de login (async?)
   handleLoginClick() {
-    // const data = {"cpf": "34821505754", "password": "pass"}
+    const { store } = this.props;
+
     const data = { cpf: this.cpf.value, password: this.pwd.value };
 
       // Chama a api de clientes
@@ -27,25 +30,22 @@ export default class Login extends React.Component {
       if (data.error_code == 'NOT_FOUND') {
           // Tratar login invalido
       } else {
-        const user_id = data.payload.id;
-        const token   = data.payload.token;
+        store.userinfo = {logged: true, user_id: data.payload.id, token: data.payload.token}
 
-        localStorage.setItem('user_id', user_id);
-        localStorage.setItem('token',   token);
-        localStorage.setItem('logged',  true);
+        console.log(store.userinfo)
 
         // Segundo fetch pra pegar os dados do usuario
-        fetch('http://mc437.ddns.net:5000/client/' + user_id, {
+        fetch('http://mc437.ddns.net:5000/client/' + store.userinfo.user_id, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
-            'x-access-token': token
+            'x-access-token': store.userinfo.token
           }
         }).then(response => response.json()).then((data) => {
-          localStorage.setItem('user_name', data.payload.name);
-          localStorage.setItem('user_phone', data.payload.phone);
-          localStorage.setItem('user_cpf', data.payload.cpf);
-          localStorage.setItem('user_email', data.payload.email);
+          store.userinfo.name     = data.payload.name;
+          store.userinfo.phone    = data.payload.phone;
+          store.userinfo.cpf      = data.payload.cpf;
+          store.userinfo.phone    = data.payload.phone;
 
         });
 

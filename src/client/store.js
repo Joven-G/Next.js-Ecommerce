@@ -12,6 +12,20 @@ const defaultStore = exports.defaultStore = {
     locale: 'en',
     env: 'production'
   },
+  userinfo:{
+    logged: false,
+    token: 0,
+    user_id: 0,
+    name: "",
+    phone: "",
+    cpf: "",
+    email: ""
+  },
+  carrinho: {
+    produtos: {}
+  },
+  produtos: [],
+  produto: null,
   snackbar: {
     active: false,
     message: '',

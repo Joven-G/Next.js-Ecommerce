@@ -32,11 +32,13 @@ export default function createRoutes(store) {
     <Route getComponent={requireAsync('App')} onEnter={setParams(store)}>
 
       <Route getComponent={requireAsync('Home')}>
-        <Route getComponent={requireAsync('Index')} path="/" />
-        <Route getComponent={requireAsync('About')} path="about" />
-        <Route getComponent={requireAsync('Carrinho')} path="carrinho" />
+        <Route getComponent={requireAsync('Produtos/Index')} path="/" />
+        <Route getComponent={requireAsync('Produtos/Categoria')} path="/produtos/:category" />
+        <Route getComponent={requireAsync('Produtos/Item')} path="/produto/:produto_id" />
+        <Route getComponent={requireAsync('Carrinho/Index')} path="carrinho" />
         <Route getComponent={requireAsync('Login')} path="login" />
         <Route getComponent={requireAsync('Profile')} path="profile" />
+        <Route getComponent={requireAsync('About')} path="about" />
       </Route>
 
       <Route getComponent={requireAsync('NotLoggedIn')} path="">
