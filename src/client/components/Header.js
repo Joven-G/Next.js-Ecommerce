@@ -4,30 +4,23 @@ import { Nav, NavItem, Navbar } from 'react-bootstrap';
 import FormProcurar from './FormProcurar';
 
 export default class Header extends React.Component {
-
   constructor(props) {
     super(props);
 
-    this.state = {
-      logged: false
-    };
+    const isLogged = localStorage.getItem('logged');
+
+    if (isLogged) {
+      this.state = {
+        logged: true,
+        user_name: localStorage.getItem('user_name')
+      }
+
+    } else {
+      this.state = {
+        logged: false
+      };
+    }
   }
-  // constructor(props) {
-  //   super(props);
-  //
-  //   const isLogged = localStorage.getItem('logged');
-  //   if (isLogged) {
-  //
-  //
-  //   } else {
-  //     this.state = { logged: false };
-  //   }
-  //
-  //     // this.state = {
-  //     //   logged:  localStorage.getItem("logged"),
-  //     //   user_id: localStorage.getItem("user_id"),
-  //     //   token:   }
-  // }
 
   render() {
     let NavUsuario;
@@ -36,14 +29,15 @@ export default class Header extends React.Component {
     if (this.state.logged === true) {
       NavUsuario = (
         <Navbar.Text pullRight>
-                  Signed in as: <Navbar.Link href="#">Mark Otto</Navbar.Link>
+                  Signed in as: <Navbar.Link href="#">{this.state.user_name}</Navbar.Link>
         </Navbar.Text>
               );
       NavLogin = (
         <Nav pullRight>
-          <NavItem eventKey={2} href="#">
-                    Logout
-                  </NavItem>
+          <NavItem onClick={(e) => { localStorage.clear();
+                                     window.location.reload(); } }>
+            Logout
+          </NavItem>
         </Nav>
               );
     } else {

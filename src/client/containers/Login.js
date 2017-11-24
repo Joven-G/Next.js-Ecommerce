@@ -12,7 +12,7 @@ export default class Login extends React.Component {
 
     // Callback do botao de login (async?)
   handleLoginClick() {
-      // const data = {"cpf": "34821505754", "password": "pass"}
+    // const data = {"cpf": "34821505754", "password": "pass"}
     const data = { cpf: this.cpf.value, password: this.pwd.value };
 
       // Chama a api de clientes
@@ -27,11 +27,33 @@ export default class Login extends React.Component {
       if (data.error_code == 'NOT_FOUND') {
           // Tratar login invalido
       } else {
-        localStorage.setItem('user_id', data.payload.id);
-        localStorage.setItem('token', data.payload.token);
-        localStorage.setItem('logged', true);
+        const user_id = data.payload.id;
+        const token   = data.payload.token;
+
+        localStorage.setItem('user_id', user_id);
+        localStorage.setItem('token',   token);
+        localStorage.setItem('logged',  true);
+
+        // Segundo fetch pra pegar os dados do usuario
+        fetch('http://mc437.ddns.net:5000/client/' + user_id, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': token
+          }
+        }).then(response => response.json()).then((data) => {
+          localStorage.setItem('user_name', data.payload.name);
+          localStorage.setItem('user_phone', data.payload.phone);
+          localStorage.setItem('user_cpf', data.payload.cpf);
+          localStorage.setItem('user_email', data.payload.email);
+
+        });
+
+        // Volta pra home
+        this.props.history.push('/');
       }
     });
+
   }
 
   render() {
