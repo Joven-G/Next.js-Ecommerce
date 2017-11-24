@@ -5,6 +5,7 @@ import { inject, observer } from 'mobx-react';
 import Layout from '../../components/Layout';
 import ProdutosCarrinho from '../../components/ProdutosCarrinho';
 import InformacoesCliente from '../../components/InformacoesCliente';
+import Pagamento from '../../components/Pagamento.js';
 
 @inject('store', 'api') @observer
 export default class CarrinhoIndex extends React.Component {
@@ -97,7 +98,6 @@ export default class CarrinhoIndex extends React.Component {
             <h1>Produtos no Carrinho</h1>
             <ProdutosCarrinho />
           </div>
-
           {
             Object.values(store.carrinho.produtos).length ?
               <Panel header="Endereço de Entrega">
@@ -159,13 +159,7 @@ export default class CarrinhoIndex extends React.Component {
                           </ListGroup>
                         </Col>
 
-                        <FormGroup>
-                          <Col smOffset={2} sm={10}>
-                            <Button onClick={() => this.handleBuyButton()} bsSize="large">
-                      Finalizar Compra
-                    </Button>
-                          </Col>
-                        </FormGroup>
+                        <Pagamento />
                       </div>
                   :
                   null
