@@ -35,7 +35,9 @@ export default class CarrinhoIndex extends React.Component {
   handleBuyButton() {
     const { store } = this.props;
 
-    if (this.state.frete === -1) {
+
+    if (!this.state.frete.preco) {
+      alert('Calcule o frete antes de finalizar a compra!');
       store.snackbar = { active: true, message: 'Frete ainda nao foi calculado', success: false };
     } else if (!store.userinfo.logged) {
       store.snackbar = { active: true, message: 'Faça login para finalizar sua compra!', success: true };
