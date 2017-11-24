@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, ControlLabel, FormControl, FormGroup } from 'react-bootstrap';
+import { Button, ControlLabel, FormControl, FormGroup, Grid, Row, Col} from 'react-bootstrap';
 import { inject, observer } from 'mobx-react';
 
 import Layout from '../components/Layout';
@@ -66,25 +66,59 @@ export default class Login extends React.Component {
               width: 30%;
             }
           `}</style>
-        <Layout>
-          <h1>Login</h1>
-          <form className="formLogin">
-            <FormGroup>
-              <ControlLabel>
-                {this.state.cpfTitle}
-              </ControlLabel>
-              <FormControl inputRef={(ref) => { this.cpf = ref; }} type="text" placeholder="Usuario" />
-            </FormGroup>
-            <FormGroup>
-              <ControlLabel>
-                   Senha
-                 </ControlLabel>
-              <FormControl type="password" inputRef={(ref) => { this.pwd = ref; }} />
-            </FormGroup>
-            <Button onClick={(e) => { this.handleLoginClick(e); }}>
-                Entrar
-               </Button>
-          </form>
+ <Layout>
+          <Grid>
+            <Row>
+              <Col>
+                <p />
+                <h1>Login</h1>
+                <form className="formLogin">
+                  <FormGroup>
+                    <ControlLabel>
+                      {this.state.cpfTitle}
+                    </ControlLabel>
+                    <FormControl inputRef={(ref) => { this.cpf = ref; }} type="text" placeholder="Usuario" />
+                  </FormGroup>
+                  <FormGroup>
+                    <ControlLabel>
+                         Senha
+                       </ControlLabel>
+                    <FormControl type="password" inputRef={(ref) => { this.pwd = ref; }} />
+                  </FormGroup>
+                  <Button onClick={(e) => { this.handleLoginClick(e); }}>
+                      Entrar
+                     </Button>
+                </form>
+              </Col>
+              <Col>
+                <p />
+                <h1>Cadastro Cliente</h1>
+               <form className="formCadastroCliente">
+                 <FormGroup>
+                   <ControlLabel>
+                     {this.state.cpfTitle}
+                   </ControlLabel>
+                   <FormControl inputRef={(ref) => { this.cpf = ref; }} type="text" placeholder="Usuario" />
+                 </FormGroup>
+                 <FormGroup>
+                   <ControlLabel>
+                        Senha
+                      </ControlLabel>
+                   <FormControl type="password" inputRef={(ref) => { this.pwd = ref; }} />
+                 </FormGroup>
+                 <FormGroup>
+                   <ControlLabel>
+                        Confirmar Senha
+                      </ControlLabel>
+                   <FormControl type="password" inputRef={(ref) => { this.pwd = ref; }} />
+                 </FormGroup>
+                 <Button onClick={(e) => { this.handleLoginClick(e); }}>
+                     Cadastrar e Entrar
+                    </Button>
+               </form>
+              </Col>
+            </Row>
+          </Grid>
         </Layout>
       </div>
     );
