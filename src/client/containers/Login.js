@@ -17,16 +17,16 @@ export default class Login extends React.Component {
 
     const data = {
       "username": "",
-      "name": "Alguém",
+      "name": this.nome.value,
       "password": this.pwd.value,
-      "phone": "123231",
+      "phone": this.telefone.value,
       "cpf": this.cpf.value,
-      "email": "sadas@daa.das"
+      "email": this.email.value
     }
 
     console.log(data);
 
-    // Segundo fetch pra pegar os dados do usuario
+    // Fetch para cadastro de usuario
     fetch('http://mc437.ddns.net:5000/client', {
       method: 'POST',
       headers: {
@@ -40,7 +40,26 @@ export default class Login extends React.Component {
 
       if (data.error_code){
         store.snackbar = { active: true, message: 'Erro ao cadastrar ' + data.error_code, success: false };
+      }else{
+        // Fetch para registrar no modulo de credito
+        fetch('http://mc437.ddns.net:5000/client', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
 
+          },
+          body: JSON.stringify(data)
+        }).then(response => response.json()).then((data) => {
+          console.log("Tentando registrar");
+          console.log(data);
+
+          if (data.error_code){
+            store.snackbar = { active: true, message: 'Erro ao cadastrar ' + data.error_code, success: false };
+          }
+
+        });
+
+        store.snackbar = { active: true, message: 'Usuario cadastrado com sucesso!' + data.error_code, success: false };
       }
 
     });
@@ -158,6 +177,12 @@ export default class Login extends React.Component {
                         CEP
                       </ControlLabel>
                    <FormControl type="text" inputRef={(ref) => { this.cep = ref; }} />
+                 </FormGroup>
+                 <FormGroup>
+                   <ControlLabel>
+                        E-mail
+                      </ControlLabel>
+                   <FormControl type="text" inputRef={(ref) => { this.email = ref; }} />
                  </FormGroup>
                  <FormGroup>
                    <ControlLabel>
