@@ -16,7 +16,7 @@ export default class Login extends React.Component {
     const { store } = this.props;
 
     const data = {
-      "username": "",
+      "username": this.cpf.value,
       "name": this.nome.value,
       "password": this.pwd.value,
       "phone": this.telefone.value,
@@ -41,25 +41,33 @@ export default class Login extends React.Component {
       if (data.error_code){
         store.snackbar = { active: true, message: 'Erro ao cadastrar ' + data.error_code, success: false };
       }else{
+        console.log("SAOISADJAOSJDSOIJDSAIODJSOIADJSADASJOIJ");
+        const data2 = {
+          "api_key": "mc437_key_2017",
+          "cpf": this.cpf.value,
+          "name": this.nome.value,
+          "street": "street name",
+          "neighborhood": "neighborhood name",
+          "city": "city name",
+          "state": "sp"
+        }
+
+        console.log(data2);
+
         // Fetch para registrar no modulo de credito
-        fetch('http://mc437.ddns.net:5000/client', {
+        fetch('https://mc437.viniciusfabri.com/sc/api/person', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-
           },
-          body: JSON.stringify(data)
+          body: JSON.stringify(data2)
         }).then(response => response.json()).then((data) => {
-          console.log("Tentando registrar");
+          console.log("Tentando registrar no modulo de credito");
           console.log(data);
-
-          if (data.error_code){
-            store.snackbar = { active: true, message: 'Erro ao cadastrar ' + data.error_code, success: false };
-          }
-
         });
 
-        store.snackbar = { active: true, message: 'Usuario cadastrado com sucesso!' + data.error_code, success: false };
+        this.props.history.push('login');
+        store.snackbar = { active: true, message: 'Usuario cadastrado com sucesso!', success: true };
       }
 
     });
@@ -70,7 +78,8 @@ export default class Login extends React.Component {
   handleLoginClick() {
     const { store } = this.props;
 
-    const data = { cpf: this.cpf.value, password: this.pwd.value };
+    const data = { cpf: this.cpf1.value, password: this.pwd1.value };
+    console.log(data);
 
       // Chama a api de clientes
     fetch('http://mc437.ddns.net:5000/client/auth', {
@@ -131,13 +140,13 @@ export default class Login extends React.Component {
                     <ControlLabel>
                       {this.state.cpfTitle}
                     </ControlLabel>
-                    <FormControl inputRef={(ref) => { this.cpf = ref; }} type="text" placeholder="Usuario" />
+                    <FormControl inputRef={(ref) => { this.cpf1 = ref; }} type="text" placeholder="Usuario" />
                   </FormGroup>
                   <FormGroup>
                     <ControlLabel>
                          Senha
                        </ControlLabel>
-                    <FormControl type="password" inputRef={(ref) => { this.pwd = ref; }} />
+                    <FormControl type="password" inputRef={(ref) => { this.pwd1 = ref; }} />
                   </FormGroup>
                   <Button onClick={(e) => { this.handleLoginClick(e); }}>
                       Entrar
@@ -197,7 +206,7 @@ export default class Login extends React.Component {
                    <FormControl type="password" inputRef={(ref) => { this.pwd = ref; }} />
                  </FormGroup>
                  <Button onClick={(e) => { this.handleNewUer(e); }}>
-                     Cadastrar e Entrar
+                     Cadastrar
                     </Button>
                </form>
             </Tab>
