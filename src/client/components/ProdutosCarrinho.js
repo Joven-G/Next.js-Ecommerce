@@ -13,6 +13,32 @@ export default class ProdutosCarrinho extends React.Component {
     preco: 10
   }
 
+  aumentaQtd = (produto) =>{
+      const { store } = this.props;
+      if(produto.stock>0)
+      {
+          produto.stock -= 1;
+
+          store.carrinho.produtos[produto._id].quantidade += 1;
+      }
+      this.setState({});
+      return;
+  }
+
+  diminuiQtd = (produto) =>{
+      const { store } = this.props;
+      if(store.carrinho.produtos[produto._id].quantidade>0)
+      {
+          store.carrinho.produtos[produto._id].quantidade -= 1;
+
+          produto.stock += 1;
+      }
+
+      this.setState({});
+      return;
+
+  }
+
   removerCarrinho = (id) => {
     const { store } = this.props;
 
@@ -55,6 +81,9 @@ export default class ProdutosCarrinho extends React.Component {
                 </th>
                 <td>
                   {produto.quantidade}
+
+                  <Button bsSize="xsmall" onClick={() => this.aumentaQtd(produto)}>+</Button>
+                  <Button bsSize="xsmall" onClick={() => this.diminuiQtd(produto)}>-</Button>
                 </td>
                 <td>
                   {produto.price * produto.quantidade}
