@@ -161,7 +161,7 @@ export default class CarrinhoIndex extends React.Component {
 
                         <FormGroup>
                           <Col smOffset={2} sm={10}>
-                            <Button onClick={() => { this.handleBuyButton(); }} bsSize="large">
+                            <Button onClick={() => this.handleBuyButton()} bsSize="large">
                       Finalizar Compra
                     </Button>
                           </Col>
