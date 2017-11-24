@@ -24,6 +24,10 @@ const defaultStore = exports.defaultStore = {
   carrinho: {
     produtos: {}
   },
+  frete: {
+  },
+  finalizado: {
+  },
   produtos: [],
   produto: null,
   snackbar: {

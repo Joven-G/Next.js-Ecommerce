@@ -30,15 +30,14 @@ export const createAPI = () => {
         data.append(param, finalParams.params[param]);
       });
     } else {
-      data = finalParams.params;
+      data = finalParams;
     }
     console.log('POST ' + endpoint, data);
 
     return axios({
       method: 'post',
-      url: `${url}/${endpoint}`,
-      header: {},
-      data
+      url: `${url}/${endpoint}?${qs.stringify(data)}`,
+      header: {}
     }).then(response => response.data).catch((error) => {
       console.log('post error', error);
 

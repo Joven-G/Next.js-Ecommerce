@@ -60,13 +60,27 @@ class Pagamento extends React.Component {
     }
 
     pagar = () => {
+      const { store } = this.props;
 
       this.setState({ loading: true });
       const promises = Object.values(this.props.store.carrinho.produtos).map((produto) =>
         this.props.api.put('http://ec2-54-207-63-160.sa-east-1.compute.amazonaws.com:3000', `products/${produto._id}/increase/stock/${-produto.quantidade}`, {})
       .then((data) => { console.log(data); }));
 
+      promises.push(this.props.api.post('http://site-env.mxvnckfmbb.us-east-2.elasticbeanstalk.com', 'api/envio', {
+        destinatario: store.frete.destinatario || 'John',
+        id_site: store.frete.id_site,
+        destino_cep: store.frete.destino_cep,
+        destino_numero: store.frete.destino_numero,
+        destino_estado: store.frete.destino_estado,
+        destino_cidade: store.frete.destino_cidade,
+        destino_endereco: store.frete.destino_endereco,
+        volume: store.frete.volume
+      })
+        .then((data) => { this.props.store.finalizado = data; }));
+
       Promise.all(promises).then(() => {
+        this.props.store.frete = {};
         this.props.store.carrinho.produtos = {};
         browserHistory.push('/finalizado');
       });

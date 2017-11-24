@@ -74,6 +74,17 @@ export default class CarrinhoIndex extends React.Component {
       return;
     }
 
+    store.frete = {
+      destinatario: store.userinfo.name,
+      id_site: 9,
+      destino_cep: cep,
+      destino_numero: numero,
+      destino_estado: estado,
+      destino_cidade: cidade,
+      destino_endereco: endereco,
+      volume
+    };
+
     this.setState({ frete: { preco: data.preco, prazo: data.tempo } });
   }
 
