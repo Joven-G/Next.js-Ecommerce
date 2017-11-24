@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, ControlLabel, FormControl, FormGroup } from 'react-bootstrap';
+import { Button, ControlLabel, FormControl, FormGroup, Tabs, Tab} from 'react-bootstrap';
 import { inject, observer } from 'mobx-react';
 
 import Layout from '../components/Layout';
@@ -10,6 +10,60 @@ export default class Login extends React.Component {
     super(props);
 
     this.state = { cpfTitle: 'CPF' };
+  }
+
+  handleNewUer(){
+    const { store } = this.props;
+
+    const data = {
+      "username": "",
+      "name": this.nome.value,
+      "password": this.pwd.value,
+      "phone": this.telefone.value,
+      "cpf": this.cpf.value,
+      "email": this.email.value
+    }
+
+    console.log(data);
+
+    // Fetch para cadastro de usuario
+    fetch('http://mc437.ddns.net:5000/client', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+
+      },
+      body: JSON.stringify(data)
+    }).then(response => response.json()).then((data) => {
+      console.log("Tentando registrar");
+      console.log(data);
+
+      if (data.error_code){
+        store.snackbar = { active: true, message: 'Erro ao cadastrar ' + data.error_code, success: false };
+      }else{
+        // Fetch para registrar no modulo de credito
+        fetch('http://mc437.ddns.net:5000/client', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+
+          },
+          body: JSON.stringify(data)
+        }).then(response => response.json()).then((data) => {
+          console.log("Tentando registrar");
+          console.log(data);
+
+          if (data.error_code){
+            store.snackbar = { active: true, message: 'Erro ao cadastrar ' + data.error_code, success: false };
+          }
+
+        });
+
+        store.snackbar = { active: true, message: 'Usuario cadastrado com sucesso!' + data.error_code, success: false };
+      }
+
+    });
+
   }
 
     // Callback do botao de login (async?)
@@ -67,24 +121,87 @@ export default class Login extends React.Component {
             }
           `}</style>
         <Layout>
-          <h1>Login</h1>
-          <form className="formLogin">
-            <FormGroup>
-              <ControlLabel>
-                {this.state.cpfTitle}
-              </ControlLabel>
-              <FormControl inputRef={(ref) => { this.cpf = ref; }} type="text" placeholder="Usuario" />
-            </FormGroup>
-            <FormGroup>
-              <ControlLabel>
-                   Senha
-                 </ControlLabel>
-              <FormControl type="password" inputRef={(ref) => { this.pwd = ref; }} />
-            </FormGroup>
-            <Button onClick={(e) => { this.handleLoginClick(e); }}>
-                Entrar
-               </Button>
-          </form>
+          <p />
+          <Tabs >
+            <Tab eventKey={1} title="Login">
+                <p />
+                <h1>Login</h1>
+                <form className="formLogin">
+                  <FormGroup>
+                    <ControlLabel>
+                      {this.state.cpfTitle}
+                    </ControlLabel>
+                    <FormControl inputRef={(ref) => { this.cpf = ref; }} type="text" placeholder="Usuario" />
+                  </FormGroup>
+                  <FormGroup>
+                    <ControlLabel>
+                         Senha
+                       </ControlLabel>
+                    <FormControl type="password" inputRef={(ref) => { this.pwd = ref; }} />
+                  </FormGroup>
+                  <Button onClick={(e) => { this.handleLoginClick(e); }}>
+                      Entrar
+                     </Button>
+                </form>
+              </Tab>
+            <Tab eventKey={2} title="Novo Cliente">
+                <p />
+                <h1>Cadastro Cliente</h1>
+               <form className="formCadastroCliente">
+                 <FormGroup>
+                   <ControlLabel>
+                     {this.state.cpfTitle}
+                   </ControlLabel>
+                   <FormControl inputRef={(ref) => { this.cpf = ref; }} type="text" placeholder="Usuario" />
+                 </FormGroup>
+                 <FormGroup>
+                   <ControlLabel>
+                        Nome
+                      </ControlLabel>
+                   <FormControl type="text" inputRef={(ref) => { this.nome = ref; }} />
+                 </FormGroup>
+                 <FormGroup>
+                   <ControlLabel>
+                        Telefone
+                      </ControlLabel>
+                   <FormControl type="text" inputRef={(ref) => { this.telefone = ref; }} />
+                 </FormGroup>
+                 <FormGroup>
+                   <ControlLabel>
+                        Endereco
+                      </ControlLabel>
+                   <FormControl type="text" inputRef={(ref) => { this.endereco = ref; }} />
+                 </FormGroup>
+                 <FormGroup>
+                   <ControlLabel>
+                        CEP
+                      </ControlLabel>
+                   <FormControl type="text" inputRef={(ref) => { this.cep = ref; }} />
+                 </FormGroup>
+                 <FormGroup>
+                   <ControlLabel>
+                        E-mail
+                      </ControlLabel>
+                   <FormControl type="text" inputRef={(ref) => { this.email = ref; }} />
+                 </FormGroup>
+                 <FormGroup>
+                   <ControlLabel>
+                        Senha
+                      </ControlLabel>
+                   <FormControl type="password" inputRef={(ref) => { this.pwd = ref; }} />
+                 </FormGroup>
+                 <FormGroup>
+                   <ControlLabel>
+                        Confirmar Senha
+                      </ControlLabel>
+                   <FormControl type="password" inputRef={(ref) => { this.pwd = ref; }} />
+                 </FormGroup>
+                 <Button onClick={(e) => { this.handleNewUer(e); }}>
+                     Cadastrar e Entrar
+                    </Button>
+               </form>
+            </Tab>
+          </Tabs>
         </Layout>
       </div>
     );

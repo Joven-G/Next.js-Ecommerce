@@ -5,15 +5,25 @@ import { inject, observer } from 'mobx-react';
 import Layout from '../../components/Layout';
 import ProdutosCarrinho from '../../components/ProdutosCarrinho';
 import InformacoesCliente from '../../components/InformacoesCliente';
+import Pagamento from '../../components/Pagamento.js';
 
-@inject('store') @observer
+@inject('store', 'api') @observer
 export default class CarrinhoIndex extends React.Component {
 
   state = {
       // logged: this.props.store.user || false;
     logged: false,
-    preco: 0,
-    frete: -1
+    frete: {
+      preco: null,
+      prazo: null
+    },
+    values: {
+      endereco: '',
+      cidade: '',
+      estado: '',
+      numero: '',
+      cep: ''
+    }
   }
 
   frete = () => {
@@ -23,23 +33,59 @@ export default class CarrinhoIndex extends React.Component {
     this.setState({ preco: 20 });
   }
 
-  handleBuyButton(){
+  handleBuyButton() {
     const { store } = this.props;
 
-    if (this.state.frete === -1){
-      alert("Calcule o frete antes de finalizar a compra!");
-      store.snackbar = { active: true, message: 'Frete ainda nao foi calculado', success: false };
 
-    }else if (!store.userinfo.logged){
+    if (!this.state.frete.preco) {
+      alert('Calcule o frete antes de finalizar a compra!');
+      store.snackbar = { active: true, message: 'Frete ainda nao foi calculado', success: false };
+    } else if (!store.userinfo.logged) {
       store.snackbar = { active: true, message: 'Faça login para finalizar sua compra!', success: true };
       this.props.history.push('login');
-
     }
   }
 
+  handleChange = (e, name) => {
+    this.setState({ values: { ...this.state.values, [name]: e.target.value } });
+  }
+
+  calcularFrete = async () => {
+    const { api, store } = this.props;
+    const { cep, numero, estado, cidade, endereco } = this.state.values;
+    let volume = 0;
+
+    Object.values(store.carrinho.produtos).forEach((produto) => {
+      volume += produto.quantidade * (parseInt(produto.dimensions[0], 10) * parseInt(produto.dimensions[1], 10) * parseInt(produto.dimensions[2], 10));
+    });
+
+    const data = await api.get('http://site-env.mxvnckfmbb.us-east-2.elasticbeanstalk.com', 'api/consulta', {
+      id_site: 9,
+      destino_cep: cep,
+      destino_numero: numero,
+      destino_estado: estado,
+      destino_cidade: cidade,
+      destino_endereco: endereco,
+      volume
+    });
+
+    if (data.erro) {
+      store.snackbar = { active: true, message: data.erro, success: false };
+      return;
+    }
+
+    this.setState({ frete: { preco: data.preco, prazo: data.tempo } });
+  }
+
   render() {
-    const produtos = Object.values(this.props.store.carrinho.produtos);
-    console.log(produtos);
+    const { store } = this.props;
+    const { frete, values } = this.state;
+    const dadosPreenchidos = values.endereco && values.cidade && values.estado && values.numero && values.cep;
+    let precoProdutos = 0;
+
+    Object.values(store.carrinho.produtos).forEach((produto) => {
+      precoProdutos += produto.quantidade * (produto.price);
+    });
 
     return (
       <div>
@@ -52,61 +98,77 @@ export default class CarrinhoIndex extends React.Component {
             <h1>Produtos no Carrinho</h1>
             <ProdutosCarrinho />
           </div>
+          {
+            Object.values(store.carrinho.produtos).length ?
+              <Panel header="Endereço de Entrega">
+                <Form horizontal style={{ padding: '32px' }}>
+                  <FormGroup>
+                    <ControlLabel>Endereço</ControlLabel>
+                    <FormControl
+                      type="text"
+                      value={values.endereco}
+                      onChange={e => this.handleChange(e, 'endereco')}
+                    />
+                    <ControlLabel>Cidade</ControlLabel>
+                    <FormControl
+                      type="text"
+                      value={values.cidade}
+                      onChange={e => this.handleChange(e, 'cidade')}
+                    />
+                    <ControlLabel>Estado</ControlLabel>
+                    <FormControl
+                      type="text"
+                      value={values.estado}
+                      onChange={e => this.handleChange(e, 'estado')}
+                    />
+                    <ControlLabel>Número</ControlLabel>
+                    <FormControl
+                      type="text"
+                      value={values.numero}
+                      onChange={e => this.handleChange(e, 'numero')}
+                    />
+                    <ControlLabel>CEP</ControlLabel>
+                    <FormControl
+                      type="text"
+                      value={values.cep}
+                      onChange={e => this.handleChange(e, 'cep')}
+                    />
+                    <Col
+                      componentClass={Button}
+                      smOffset={1}
+                      disabled={!dadosPreenchidos}
+                      onClick={() => this.calcularFrete()}
+                    >
+                      {!frete.preco ? 'Calcular frete' : 'Re-Calcular Frete'}
+                    </Col>
+                  </FormGroup>
+                  {
+                    frete.preco ?
+                      <div>
+                        <Col>
+                          <ListGroup>
+                            <ListGroupItem header="Preço Frete">
+                          R$ {frete.preco}
+                            </ListGroupItem>
+                            <ListGroupItem header="Preço Final">
+                          R$ {frete.preco + precoProdutos}
+                            </ListGroupItem>
+                            <ListGroupItem header="Prazo Final">
+                              {frete.prazo} dias
+                      </ListGroupItem>
+                          </ListGroup>
+                        </Col>
 
-          <Panel header="Endereço de Entrega">
-            <Form horizontal>
-              <FormGroup>
-                <Col componentClass={ControlLabel} sm={1}>
-                  CPF
-                </Col>
-                <Col sm={5}>
-                  <FormControl
-                    id="txtCpf"
-                    type="cpf"
-                    placeholder="this.prop.store.user.cpf"
-                  />
-                </Col>
-              </FormGroup>
-
-              <FormGroup>
-                <Col componentClass={ControlLabel} sm={1}>
-                Endereço
-              </Col>
-                <Col sm={5}>
-                  <FormControl
-                    id="txtEndereco"
-                    type="endereco"
-                    placeholder="this.prop.store.user.endereco"
-                  />
-                </Col>
-              </FormGroup>
-
-              <FormGroup>
-                <Col
-                  componentClass={Button}
-                  smOffset={1}
-                  onClick={this.frete}
-                >
-                Re-Calcular Frete
-              </Col>
-              </FormGroup>
-              <Col>
-                <ListGroup>
-                  <ListGroupItem header="Preço Final">
-                  R$ {produtos.reduce((preve, e) => {return preve.price + e.price} )}
-                  </ListGroupItem>
-                </ListGroup>
-              </Col>
-
-              <FormGroup>
-                <Col smOffset={2} sm={10}>
-                  <Button onClick={() => {this.handleBuyButton()}} bsSize="large">
-                  Finalizar Compra
-                </Button>
-                </Col>
-              </FormGroup>
-            </Form>
-          </Panel>
+                        <Pagamento />
+                      </div>
+                  :
+                  null
+                  }
+                </Form>
+              </Panel>
+            :
+              null
+          }
         </Layout>
       </div>
     );
