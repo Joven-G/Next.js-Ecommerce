@@ -13,10 +13,14 @@ export default class Carrinho extends React.Component {
     state = {
         // logged: this.props.store.user || false;
         logged: false,
+        preco: 10
     }
 
     frete(){
-        alert("BBBB");
+        var cpf = document.getElementById("txtCpf").value
+        var endereco = document.getElementById("txtEndereco").value
+        alert("[" + cpf + "] [" + endereco + "]");
+        this.setState({preco:20});
     }
 
     render (){
@@ -44,6 +48,7 @@ export default class Carrinho extends React.Component {
                     </Col>
                     <Col sm={5}>
                       <FormControl 
+                        id = "txtCpf"
                         type="cpf" 
                         placeholder="this.prop.store.user.cpf" />
                     </Col>
@@ -54,20 +59,25 @@ export default class Carrinho extends React.Component {
                     Endereço
                   </Col>
                   <Col sm={5}>
-                    <FormControl 
+                    <FormControl
+                      id = "txtEndereco"
                       type="endereco" 
                       placeholder="this.prop.store.user.endereco" />
                   </Col>
                 </FormGroup>
 
                 <FormGroup>
-                  <Col componentClass={Button} smOffset={1} onClick={this.frete}>
+                  <Col componentClass={Button} 
+                       smOffset={1} 
+                       onClick={this.frete}>
                     Re-Calcular Frete
                   </Col>
                 </FormGroup>
                 <Col>
                   <ListGroup>
-                    <ListGroupItem header="Preço Final">R$ this.prop.state.preco</ListGroupItem>
+                    <ListGroupItem header="Preço Final">
+                      R$ {this.state.preco}
+                    </ListGroupItem>
                   </ListGroup>
                 </Col>
             

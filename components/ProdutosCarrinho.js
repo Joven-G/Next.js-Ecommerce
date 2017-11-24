@@ -3,14 +3,14 @@ import { Button } from 'react-bootstrap';
 
 export default class ProdutosCarrinho extends React.Component {
     state = {
+        id: 123,
         nome: "Produto",
         quantidade: 3,
         preco: 10
     }
 
-    removerCarrinho(){
-        alert("AAAA");
-        console.log("Remover do Carrinho");
+    removerCarrinho(id){
+        alert("Remover do Carrinho produto de id: [" + id + "]");
     }
 
     render (){
@@ -34,7 +34,7 @@ export default class ProdutosCarrinho extends React.Component {
             </thead>
             <tbody>
               {/* 1 produto por linha*/}
-              <tr>
+              <tr id={this.state.id} >
                 <th>
                   {this.state.nome}
                 </th>
@@ -45,7 +45,9 @@ export default class ProdutosCarrinho extends React.Component {
                   {this.state.preco}
                 </td>
                 <td>
-                  <Button bsSize="xsmall" onClick={this.removerCarrinho}>
+                <Button 
+                  bsSize="xsmall" 
+                  onClick={this.removerCarrinho.bind(this, this.state.id)}>
                     Remover do Carrinho
                   </Button>
                 </td>
