@@ -28,7 +28,8 @@ export default class Login extends React.Component {
     }).then(response => response.json()).then((data) => {
       console.log(data);
       if (data.error_code == 'NOT_FOUND') {
-          // Tratar login invalido
+          store.snackbar = { active: true, message: 'Usuario não cadastrado ou senha invalida', success: false };
+
       } else {
         store.userinfo = {logged: true, user_id: data.payload.id, token: data.payload.token}
 
@@ -50,6 +51,7 @@ export default class Login extends React.Component {
         });
 
         // Volta pra home
+        store.snackbar = { active: true, message: 'Bem vindo (: ', success: true };
         this.props.history.push('/');
       }
     });
