@@ -12,6 +12,41 @@ export default class Login extends React.Component {
     this.state = { cpfTitle: 'CPF' };
   }
 
+  handleNewUer(){
+    const { store } = this.props;
+
+    const data = {
+      "username": "",
+      "name": "Alguém",
+      "password": this.pwd.value,
+      "phone": "123231",
+      "cpf": this.cpf.value,
+      "email": "sadas@daa.das"
+    }
+
+    console.log(data);
+
+    // Segundo fetch pra pegar os dados do usuario
+    fetch('http://mc437.ddns.net:5000/client', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+
+      },
+      body: JSON.stringify(data)
+    }).then(response => response.json()).then((data) => {
+      console.log("Tentando registrar");
+      console.log(data);
+
+      if (data.error_code){
+        store.snackbar = { active: true, message: 'Erro ao cadastrar ' + data.error_code, success: false };
+
+      }
+
+    });
+
+  }
+
     // Callback do botao de login (async?)
   handleLoginClick() {
     const { store } = this.props;
@@ -112,7 +147,7 @@ export default class Login extends React.Component {
                       </ControlLabel>
                    <FormControl type="password" inputRef={(ref) => { this.pwd = ref; }} />
                  </FormGroup>
-                 <Button onClick={(e) => { this.handleLoginClick(e); }}>
+                 <Button onClick={(e) => { this.handleNewUer(e); }}>
                      Cadastrar e Entrar
                     </Button>
                </form>
