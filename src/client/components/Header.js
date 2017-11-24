@@ -1,34 +1,35 @@
 import React from 'react';
 import { Nav, NavItem, Navbar } from 'react-bootstrap';
+import { inject, observer } from 'mobx-react';
 import { Link } from 'react-router';
 
 import FormProcurar from './FormProcurar';
 
+@inject('store') @observer
 export default class Header extends React.Component {
-
-  constructor(props) {
+  constructor (props){
     super(props);
+    
+    const { store } = this.props;
 
-    this.state = {
-      logged: false
-    };
+    if (store.userinfo.logged) {
+      this.state = {
+        logged: true,
+        user_name: store.userinfo.user_name
+      }
+
+    } else {
+      this.state = {
+        logged: false
+      };
+    }
   }
-  // constructor(props) {
-  //   super(props);
-  //
-  //   const isLogged = localStorage.getItem('logged');
-  //   if (isLogged) {
-  //
-  //
-  //   } else {
-  //     this.state = { logged: false };
-  //   }
-  //
-  //     // this.state = {
-  //     //   logged:  localStorage.getItem("logged"),
-  //     //   user_id: localStorage.getItem("user_id"),
-  //     //   token:   }
-  // }
+
+  handleLogoutClick(){
+    const { store } = this.props;
+    store.userinfo.logged = false;
+    window.location.reload();
+  }
 
   render() {
     let NavUsuario;
@@ -37,14 +38,14 @@ export default class Header extends React.Component {
     if (this.state.logged === true) {
       NavUsuario = (
         <Navbar.Text pullRight>
-                  Signed in as: <Navbar.Link href="#">Mark Otto</Navbar.Link>
+                  Signed in as: <Navbar.Link href="#">usuario</Navbar.Link>
         </Navbar.Text>
               );
       NavLogin = (
         <Nav pullRight>
-          <NavItem eventKey={2} href="#">
-                    Logout
-                  </NavItem>
+          <NavItem onClick={(e) => {this.handleLogoutClick(e)} }>
+            Logout
+          </NavItem>
         </Nav>
               );
     } else {
@@ -62,9 +63,6 @@ export default class Header extends React.Component {
               );
     }
 
-    // console.log(this.state.logged);
-    // console.log(NavUsuario);
-    // console.log(NavLogin);
 
     return (
       <div className="header">
