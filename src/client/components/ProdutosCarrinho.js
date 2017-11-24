@@ -87,6 +87,7 @@ export default class ProdutosCarrinho extends React.Component {
                 </td>
                 <td>
                   {produto.price * produto.quantidade}
+
                 </td>
                 <td>
                   <Button

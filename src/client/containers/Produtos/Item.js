@@ -32,7 +32,7 @@ export default class ProdutosItem extends React.Component {
     }
 
     if (store.carrinho.produtos[produto._id]) {
-
+        produto.stock-=1;
       store.carrinho.produtos[produto._id].quantidade += 1;
     } else {
       const novoProduto = { ...produto };
