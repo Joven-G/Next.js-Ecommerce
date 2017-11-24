@@ -39,6 +39,7 @@ export default function createRoutes(store) {
         <Route getComponent={requireAsync('Login')} path="login" />
         <Route getComponent={requireAsync('Profile')} path="profile" />
         <Route getComponent={requireAsync('About')} path="about" />
+        <Route getComponent={requireAsync('StatusEntrega')} path="entregas" />
         <Route getComponent={requireAsync('Finalizado')} path="finalizado" />
       </Route>
 
