@@ -1,6 +1,7 @@
 import React from 'react';
 import { Tabs, Tab } from 'react-bootstrap'
 import { Form, FormControl, FormGroup, Col, ControlLabel, Button } from 'react-bootstrap'
+import { Loader } from 'semantic-ui-react';
 import { inject, observer } from 'mobx-react';
 import { browserHistory } from 'react-router';
 
@@ -47,18 +48,28 @@ const Boleto = ({ onClick }) => (
   </Form>
 )
 
-@inject('api') @observer
+@inject('store', 'api') @observer
 class Pagamento extends React.Component {
     constructor(props) {
       super(props);
 
       this.state = {
-        bomPagador: true
+        bomPagador: true,
+        loading: false
       }
     }
 
     pagar = () => {
-      browserHistory.push('/finalizado');
+
+      this.setState({ loading: true });
+      const promises = Object.values(this.props.store.carrinho.produtos).map((produto) =>
+        this.props.api.put('http://ec2-54-207-63-160.sa-east-1.compute.amazonaws.com:3000', `products/${produto._id}/increase/stock/${-produto.quantidade}`, {})
+      .then((data) => { console.log(data); }));
+
+      Promise.all(promises).then(() => {
+        this.props.store.carrinho.produtos = {};
+        browserHistory.push('/finalizado');
+      });
     }
 
 //     componentDidMount() {
@@ -96,6 +107,13 @@ class Pagamento extends React.Component {
                         <p />
 	                <Boleto onClick={() => this.pagar()} />
 	              </Tab>);
+        }
+
+        if (this.state.loading) {
+          return (<div>
+            <p>Aguarde um momento, estamos processando o seu pedido!</p>
+            <Loader active />
+          </div>);
         }
 
 	return (
