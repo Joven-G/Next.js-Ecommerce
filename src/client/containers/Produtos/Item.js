@@ -25,6 +25,11 @@ export default class ProdutosItem extends React.Component {
 
   adicionarCarrinho = (produto) => {
     const { store } = this.props;
+    if(produto.stock==0)
+    {
+        store.snackbar = { active: true, message: 'PRODUTO FORA DE ESTOQUE', success: false };
+        return;
+    }
 
     if (store.carrinho.produtos[produto._id]) {
       store.carrinho.produtos[produto._id].quantidade += 1;
@@ -57,7 +62,7 @@ export default class ProdutosItem extends React.Component {
                     src={produto.img[0]}
                     alt={produto.name}
                   />
-                  <div style={{ margin: '20px 30px', fontSize: '14px' }}>
+                  <div style={{ margin: '20px 30px', fontSize: '20px' }}>
                     <p style={{ fontWeight: 'bold' }}>{produto.description}</p>
                     <p><span style={{ fontWeight: 'bold' }}>Preço:</span> R$ {produto.price}</p>
                     <Button bsStyle="primary" onClick={() => this.adicionarCarrinho(produto)}>Adicionar ao carrinho</Button>&nbsp;
@@ -74,17 +79,10 @@ export default class ProdutosItem extends React.Component {
                       <Table.Cell textAlign="left">{produto.category}</Table.Cell>
                     </Table.Row>
                     <Table.Row>
-                      <Table.Cell textAlign="right">Modelo</Table.Cell>
-                      <Table.Cell textAlign="left">{produto.model}</Table.Cell>
+                      <Table.Cell textAlign="right">Quantidade</Table.Cell>
+                      <Table.Cell textAlign="left">{produto.stock}</Table.Cell>
                     </Table.Row>
-                    <Table.Row>
-                      <Table.Cell textAlign="right">Cor</Table.Cell>
-                      <Table.Cell textAlign="left">{produto.color}</Table.Cell>
-                    </Table.Row>
-                    <Table.Row>
-                      <Table.Cell textAlign="right">Marca</Table.Cell>
-                      <Table.Cell textAlign="left">{produto.brand}</Table.Cell>
-                    </Table.Row>
+
                   </Table.Body>
                 </Table>
               </div>
