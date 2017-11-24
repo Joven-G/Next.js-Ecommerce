@@ -2,7 +2,6 @@ import React from 'react';
 
 import Header from './Header';
 import Menu from './Menu';
-import Carrossel from './Carrossel';
 
 const layoutStyle = {
   margin: 20,
@@ -16,7 +15,6 @@ export default class Layout extends React.Component {
     return (<div style={layoutStyle}>
       <Header />
       <Menu />
-      <Carrossel />
       {this.props.children}
     </div>);
   }

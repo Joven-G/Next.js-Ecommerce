@@ -1,11 +1,15 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
+import Carrossel from '../../components/Carrossel';
 
 import Layout from '../../components/Layout';
 import GridLayout from '../../components/GridLayout';
 
 const categoryTypes = {
-  eletronicos: 'Eletrônicos'
+  eletronicos: 'Eletrônicos',
+  moda: 'Moda',
+  moveis: 'Móveis',
+  materialescolar: 'Material Escolar'
 };
 
 @inject('store') @observer
@@ -27,6 +31,7 @@ export default class ProdutosIndex extends React.Component {
     return (
       <div>
         <Layout>
+        <Carrossel />
           <h1>{`Produtos da categoria: ${categoryTypes[params.category]}`}</h1>
           <GridLayout />
         </Layout>
