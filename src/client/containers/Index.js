@@ -1,5 +1,6 @@
 import React from 'react';
 import { inject, observer } from 'mobx-react';
+import Carrossel from '../components/Carrossel';
 
 import Layout from '../components/Layout';
 import GridLayout from '../components/GridLayout';
@@ -11,6 +12,7 @@ export default class Index extends React.Component {
     return (
       <div>
         <Layout>
+          <Carrossel />
           <h1>Produtos em destaque:</h1>
           <GridLayout produtos={this.props.produtos} />
         </Layout>
