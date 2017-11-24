@@ -1,15 +1,20 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
+import { inject, observer } from 'mobx-react';
 
+@inject('store') @observer
 export default class InformacoesCliente extends React.Component {
-
   state = {
-    usuario: 'Usuario',
-    nome: 'Nome',
-    endereco: 'Endereco'
+    usuario: " ",
+    nome: " ",
+    endereco: " "
   }
 
   render() {
+    const { store } = this.props;
+    console.log(store);
+    console.log("PNSI");
+
     return (
       <Table bordered striped responsive>
         {/* Aqui estão as Informações do Cliente
@@ -21,7 +26,7 @@ export default class InformacoesCliente extends React.Component {
               Cliente:
             </th>
             <td>
-              {this.state.usuario}
+              {store.userinfo.cpf}
             </td>
           </tr>
           <tr>
@@ -29,7 +34,7 @@ export default class InformacoesCliente extends React.Component {
               Nome:
             </th>
             <td>
-              {this.state.nome}
+              {store.userinfo.name}
             </td>
           </tr>
           <tr>
@@ -37,7 +42,7 @@ export default class InformacoesCliente extends React.Component {
               Endereço:
             </th>
             <td>
-              {this.state.endereco}
+              {"Rua 10"}
             </td>
           </tr>
         </tbody>
