@@ -1,0 +1,109 @@
+html, body {
+  background-color: #fafafa !important;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  height: 100%;
+}
+
+blockquote {
+  border-left: 2px solid #ddd;
+  color: #999;
+  font-style: italic;
+  margin: 12px 0 40px 0;
+  padding: 6px 0 5px 18px;
+}
+
+
+#root {
+  height: 100%;
+
+  > .pushable {
+    transform: initial;
+
+    .pusher {
+      padding-bottom: 3.3em;
+
+      > .container {
+        margin-top: 80px;
+      }
+    }
+
+    .ui.sidebar {
+      position: fixed;
+    }
+  }
+}
+
+.ui.logo {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+.ui.vertical.menu .menu .item {
+  padding: .92857143em 1.14285714em;
+}
+
+.dimmer.none {
+  background: none !important;
+}
+
+.ui.dimmer {
+  background-color: rgba(0,0,0,0.75);
+}
+
+.ui[class*="top fixed"].menu {
+  height: 55px;
+}
+
+.ui.vertical.menu {
+  box-shadow: none;
+
+  .item>i.icon {
+    float: left;
+    margin: 0 .5em 0 0;
+  }
+}
+
+.ui.inverted.menu {
+  background: #333;
+}
+
+.ui.loaderbar {
+  width: 100%;
+  position: fixed;
+  z-index:102;
+
+  &:after {
+    content: '';
+    position: absolute;
+    display: block;
+    height: 1px;
+    left: 0%;
+    right: 100%;
+    animation: loading 2s ease infinite;
+  }
+
+  &.active:after {
+    background-color: #888;
+  }
+}
+
+@keyframes loading {
+  0% {
+    left: 0;
+    right: 100%;
+  }
+
+  50% {
+    left: 0;
+    right: 0;
+  }
+
+  100% {
+    left: 100%;
+    right: 0;
+  }
+}
