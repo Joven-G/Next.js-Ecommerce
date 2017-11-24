@@ -1,5 +1,18 @@
- .thumbnail>img {
+.img-thumb {
     display: block;
-    max-width: 50%;
-    height: auto;
+    width:310px;
+    height:310px;
+}
+.thumb-produto {
+    width:350px;
+    height:500px
+}
+.img-carousel{
+    width:800px;
+    height:900px
+}
+
+.carousel-inner > .active{
+    width:800px;
+    height:450px
 }

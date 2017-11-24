@@ -23,16 +23,6 @@ export default class GridProduto extends React.Component {
 
       return (
         <div>
-        <style type="text/css">{`
-          .img-thumb {
-              width:310px;
-              height:310px;
-          }
-          .thumb-produto {
-              width:350px;
-              height:500px
-          }
-        `}</style>
         <Grid bsClass='GridProduto'>
           {
             rows.map((row) => <Row className="show-grid">
