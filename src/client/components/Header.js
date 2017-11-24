@@ -1,5 +1,6 @@
 import React from 'react';
 import { Nav, NavItem, Navbar } from 'react-bootstrap';
+import { Link } from 'react-router';
 
 import FormProcurar from './FormProcurar';
 
@@ -74,15 +75,27 @@ export default class Header extends React.Component {
             </Navbar.Brand>
           </Navbar.Header>
           <Nav>
-            <NavItem eventKey={1} href="/">Home</NavItem>
+            <NavItem eventKey={1}>
+              <Link to="/">
+                Home
+              </Link>
+            </NavItem>
           </Nav>
           <Nav>
-            <NavItem eventKey={2} href="/about">About</NavItem>
+            <NavItem eventKey={2}>
+              <Link to="/about">
+                About
+              </Link>
+            </NavItem>
           </Nav>
           {NavLogin}
           {NavUsuario}
           <Nav pullRight>
-            <NavItem eventKey={3} href="/carrinho">Carrinho</NavItem>
+            <NavItem eventKey={3}>
+              <Link to="/carrinho">
+                Carrinho
+              </Link>
+            </NavItem>
           </Nav>
           <FormProcurar />
         </Navbar>

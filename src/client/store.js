@@ -13,8 +13,10 @@ const defaultStore = exports.defaultStore = {
     env: 'production'
   },
   carrinho: {
-    produtos: null
+    produtos: {}
   },
+  produtos: [],
+  produto: null,
   snackbar: {
     active: false,
     message: '',

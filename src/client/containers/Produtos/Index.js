@@ -5,12 +5,12 @@ import Layout from '../../components/Layout';
 import GridLayout from '../../components/GridLayout';
 
 @inject('store') @observer
-export default class IndexProdutos extends React.Component {
+export default class ProdutosIndex extends React.Component {
 
   static fetchData({ store, api }) {
     return api.get('http://ec2-54-207-63-160.sa-east-1.compute.amazonaws.com:3000', 'products', { group: 'grupo6' })
       .then((data) => {
-        store.carrinho.produtos = data;
+        store.produtos = data;
         return data;
       });
   }

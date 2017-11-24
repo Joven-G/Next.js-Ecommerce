@@ -44,6 +44,7 @@ export default class SnackbarTest extends React.Component {
           onClick={this.hideSnackbar}
           dismissAfter={2000}
           onDismiss={this.hideSnackbar}
+          style={{ fontSize: '16px' }}
         />
       </Portal>
     );

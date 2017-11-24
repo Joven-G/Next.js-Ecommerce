@@ -1,17 +1,18 @@
 import React from 'react';
-import { ButtonGroup, Button } from 'react-bootstrap';
+import { Button } from 'semantic-ui-react';
+import { Link } from 'react-router';
 
 
 export default class Menu extends React.Component {
 
   render() {
     return (
-      <ButtonGroup id="menu" justified>
-        <Button bsSize="large" href="#">Brincadeiras</Button>
-        <Button bsSize="large" href="#">Lingeries</Button>
-        <Button bsSize="large" href="#">Acessórios</Button>
-        <Button bsSize="large" href="#">Cosméticos</Button>
-      </ButtonGroup>
+      <Button.Group id="menu" size="huge">
+        <Button as={Link} to="/produtos/eletronicos">Eletrônicos</Button>
+        <Button href="#">Lingeries</Button>
+        <Button href="#">Acessórios</Button>
+        <Button href="#">Cosméticos</Button>
+      </Button.Group>
     );
   }
 
