@@ -2,6 +2,7 @@ const express = require('express')
 const next = require('next')
 const path = require('path');
 const favicon = require('serve-favicon');
+const LocalStorage = require('node-localstorage').LocalStorage;
 
 const dev = process.env.NODE_ENV !== 'production'
 const port = process.env.PORT || 3000
@@ -11,6 +12,7 @@ const handle = app.getRequestHandler()
 app.prepare()
 .then(() => {
   const server = express()
+  localStorage = new LocalStorage('./scratch');
 
   server.use(favicon(path.join(__dirname, '/favicon.ico')));
 
