@@ -12,8 +12,8 @@ export default class CarrinhoIndex extends React.Component {
   state = {
       // logged: this.props.store.user || false;
     logged: false,
-    preco: 10,
-    frete: 0
+    preco: 0,
+    frete: -1
   }
 
   frete = () => {
@@ -27,6 +27,7 @@ export default class CarrinhoIndex extends React.Component {
     const { store } = this.props;
 
     if (this.state.frete === -1){
+      alert("Calcule o frete antes de finalizar a compra!");
       store.snackbar = { active: true, message: 'Frete ainda nao foi calculado', success: false };
 
     }else if (!store.userinfo.logged){
@@ -36,15 +37,9 @@ export default class CarrinhoIndex extends React.Component {
     }
   }
 
-  calcularPreco(){
+  render() {
     const produtos = Object.values(this.props.store.carrinho.produtos);
     console.log(produtos);
-  }
-
-  render() {
-    // if (this.state.logged == false) {
-    //   console.log('Nao tem carrinho, mandar para a pagina de login');
-    // }
 
     return (
       <div>
@@ -98,7 +93,7 @@ export default class CarrinhoIndex extends React.Component {
               <Col>
                 <ListGroup>
                   <ListGroupItem header="Preço Final">
-                  R$ {this.state.preco}
+                  R$ {produtos.reduce((preve, e) => {return preve.price + e.price} )}
                   </ListGroupItem>
                 </ListGroup>
               </Col>
