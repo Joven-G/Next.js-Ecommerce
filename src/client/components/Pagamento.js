@@ -2,9 +2,10 @@ import React from 'react';
 import { Tabs, Tab } from 'react-bootstrap'
 import { Form, FormControl, FormGroup, Col, ControlLabel, Button } from 'react-bootstrap'
 import { inject, observer } from 'mobx-react';
+import { browserHistory } from 'react-router';
 
 
-const Cartao = () => (
+const Cartao = ({ onClick }) => (
   <Form horizontal>
     <FormGroup controlId="formNumeroCartao">
       <Col componentClass={ControlLabel} sm={2}>
@@ -14,7 +15,7 @@ const Cartao = () => (
         <FormControl type="text" placeholder="" />
       </Col>
     </FormGroup>
-  
+
     <FormGroup controlId="formHorizontalCodigoSegurancaCartao">
       <Col componentClass={ControlLabel} sm={2}>
         Codigo Cartao
@@ -23,10 +24,10 @@ const Cartao = () => (
         <FormControl type="text" placeholder="" />
       </Col>
     </FormGroup>
-  
+
     <FormGroup>
       <Col smOffset={2} sm={10}>
-        <Button type="submit" bsSize="large">
+        <Button type="submit" bsSize="large" onClick={onClick}>
           Comprar com Cartão
         </Button>
       </Col>
@@ -34,11 +35,11 @@ const Cartao = () => (
   </Form>
 )
 
-const Boleto = () => (
+const Boleto = ({ onClick }) => (
   <Form horizontal>
     <FormGroup>
       <Col smOffset={2} sm={10}>
-        <Button type="submit" bsSize="large">
+        <Button type="submit" bsSize="large" onClick={onClick}>
           Comprar com Boleto
         </Button>
       </Col>
@@ -46,35 +47,45 @@ const Boleto = () => (
   </Form>
 )
 
-
+@inject('api') @observer
 class Pagamento extends React.Component {
     constructor(props) {
       super(props);
 
-      this.state = {bomPagador: true}
+      this.state = {
+        bomPagador: true
+      }
     }
 
-    getInitialProps({ api }){
-
-        console.log("AAAAAAA");
-
-        // "https://mc437.viniciusfabri.com/sc/api/score/mc437_key_2017/34821505754"
-        const URL = "https://mc437.viniciusfabri.com";
-        const api_key = "mc437_key_2017";
-        var cpf = 34821505754;
-        const endpoint = "sc/api/score/"+api_key+"/"+cpf; 
-        const param =  { api_key: api_key,
-                        cpf: cpf };
-
-
-        api.get(URL, endpoint)
-            .then((data) => {
-                console.log("GRUPO7: ");
-                console.log(data);
-            });
+    pagar = () => {
+      browserHistory.push('/finalizado');
     }
-    // state = {
-    //     bomPagador: true
+
+//     componentDidMount() {
+//       const { api } = this.props;
+//
+//         console.log("AAAAAAA");
+//
+//         // "https://mc437.viniciusfabri.com/sc/api/score/mc437_key_2017/34821505754"
+//         const URL = "https://mc437.viniciusfabri.com";
+//         const api_key = "mc437_key_2017";
+//         var cpf = 34821505754;
+//         const endpoint = "sc/api/score/"+api_key+"/"+cpf;
+//         const param =  { api_key: api_key,
+//                         cpf: cpf };
+//         const headers = {
+//           'Content-Type': 'application/json',
+//            'Access-Control-Allow-Origin': '*',
+//            "cache-control": "no-cache"
+//         };
+//
+// // mau = 0
+//         api.get(URL, endpoint, param, headers)
+//             .then((data) => {
+//                 console.log("GRUPO7: ");
+//                 console.log(data);
+//             });
+//     }
 
 
     render(){
@@ -82,16 +93,16 @@ class Pagamento extends React.Component {
 
         if(this.state.bomPagador){
             boleto = (<Tab eventKey={2} title="Boleto">
-                        <p /> 
-	                <Boleto />
+                        <p />
+	                <Boleto onClick={() => this.pagar()} />
 	              </Tab>);
         }
 
 	return (
 	  <Tabs animation={false} id="tabs-pagamento">
 	    <Tab eventKey={1} title="Cartão">
-              <p /> 
-	      <Cartao />
+              <p />
+	      <Cartao onClick={() => this.pagar()} />
 	    </Tab>
             {boleto}
 	  </Tabs>
