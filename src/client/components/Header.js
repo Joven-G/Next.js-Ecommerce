@@ -61,9 +61,9 @@ export default class Header extends React.Component {
               );
     }
 
-    console.log(this.state.logged);
-    console.log(NavUsuario);
-    console.log(NavLogin);
+    // console.log(this.state.logged);
+    // console.log(NavUsuario);
+    // console.log(NavLogin);
 
     return (
       <div className="header">

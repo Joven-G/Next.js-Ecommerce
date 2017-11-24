@@ -65,6 +65,7 @@ export default class Html extends React.Component {
           />
           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap.min.css" />
           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/latest/css/bootstrap-theme.min.css" />
+          <link rel="stylesheet" href="/public/static/mycss.css" />
           <link rel="stylesheet" href={`${devServerURL}/bundle${name ? '.' + name : ''}.${env}.css${hash}`} />
           <link rel="icon" type="image/x-icon" href="/favicon.ico" />
           <script dangerouslySetInnerHTML={{ __html: injected_store }} />

@@ -1,12 +1,14 @@
 import React from 'react';
 import { Grid, Thumbnail, Button, Row, Col } from 'react-bootstrap';
+import { inject, observer } from 'mobx-react';
 
+@inject('store') @observer
 export default class GridLayout extends React.Component {
 
   render() {
-    const rows = (this.props.produtos || []).reduce((prev, item, i) => {
-      const where = Math.floor(i / 4);
-      const isNew = i === 0 || i % 4 === 0;
+    const rows = this.props.store.carrinho.produtos.reduce((prev, item, i) => {
+      const where = Math.floor(i / 3);
+      const isNew = i === 0 || i % 3 === 0;
       if (isNew) {
         prev.push([item]);
       } else {
