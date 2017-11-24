@@ -9,7 +9,7 @@ import FormProcurar from './FormProcurar';
 export default class Header extends React.Component {
   constructor (props){
     super(props);
-    
+
     const { store } = this.props;
 
     if (store.userinfo.logged) {
@@ -32,13 +32,14 @@ export default class Header extends React.Component {
   }
 
   render() {
+    const { store } = this.props;
     let NavUsuario;
     let NavLogin;
 
     if (this.state.logged === true) {
       NavUsuario = (
         <Navbar.Text pullRight>
-                  Signed in as: <Navbar.Link href="#">usuario</Navbar.Link>
+                  Signed in as: <Navbar.Link href="#">{store.userinfo.name}</Navbar.Link>
         </Navbar.Text>
               );
       NavLogin = (
@@ -69,7 +70,7 @@ export default class Header extends React.Component {
         <Navbar fluid>
           <Navbar.Header>
             <Navbar.Brand>
-              <a href="/">E-Commerce</a>
+              <a href="/">SINDO STORE</a>
             </Navbar.Brand>
           </Navbar.Header>
           <Nav>

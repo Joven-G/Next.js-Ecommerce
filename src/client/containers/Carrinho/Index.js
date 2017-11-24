@@ -6,12 +6,14 @@ import Layout from '../../components/Layout';
 import ProdutosCarrinho from '../../components/ProdutosCarrinho';
 import InformacoesCliente from '../../components/InformacoesCliente';
 
+@inject('store') @observer
 export default class CarrinhoIndex extends React.Component {
 
   state = {
       // logged: this.props.store.user || false;
     logged: false,
-    preco: 10
+    preco: 0,
+    frete: -1
   }
 
   frete = () => {
@@ -21,10 +23,23 @@ export default class CarrinhoIndex extends React.Component {
     this.setState({ preco: 20 });
   }
 
-  render() {
-    if (this.state.logged == false) {
-      console.log('Nao tem carrinho, mandar para a pagina de login');
+  handleBuyButton(){
+    const { store } = this.props;
+
+    if (this.state.frete === -1){
+      alert("Calcule o frete antes de finalizar a compra!");
+      store.snackbar = { active: true, message: 'Frete ainda nao foi calculado', success: false };
+
+    }else if (!store.userinfo.logged){
+      store.snackbar = { active: true, message: 'Faça login para finalizar sua compra!', success: true };
+      this.props.history.push('login');
+
     }
+  }
+
+  render() {
+    const produtos = Object.values(this.props.store.carrinho.produtos);
+    console.log(produtos);
 
     return (
       <div>
@@ -78,14 +93,14 @@ export default class CarrinhoIndex extends React.Component {
               <Col>
                 <ListGroup>
                   <ListGroupItem header="Preço Final">
-                  R$ {this.state.preco}
+                  R$ {produtos.reduce((preve, e) => {return preve.price + e.price} )}
                   </ListGroupItem>
                 </ListGroup>
               </Col>
 
               <FormGroup>
                 <Col smOffset={2} sm={10}>
-                  <Button type="submit" bsSize="large">
+                  <Button onClick={() => {this.handleBuyButton()}} bsSize="large">
                   Finalizar Compra
                 </Button>
                 </Col>
