@@ -33,13 +33,18 @@ export default class CarrinhoIndex extends React.Component {
     }else if (!store.userinfo.logged){
       store.snackbar = { active: true, message: 'Faça login para finalizar sua compra!', success: true };
       this.props.history.push('login');
-
     }
   }
 
   render() {
     const produtos = Object.values(this.props.store.carrinho.produtos);
     console.log(produtos);
+
+    // this.valorTotal = produtos.reduce((preve, e) => {return preve.price + e.price}, 0);
+    this.valorTotal = 0;
+    for (var i = 0; i < produtos.length; i++) {
+      this.valorTotal += produtos[i].price;
+    }
 
     return (
       <div>
@@ -93,7 +98,7 @@ export default class CarrinhoIndex extends React.Component {
               <Col>
                 <ListGroup>
                   <ListGroupItem header="Preço Final">
-                  R$ {produtos.reduce((preve, e) => {return preve.price + e.price} )}
+                  R$ {this.valorTotal}
                   </ListGroupItem>
                 </ListGroup>
               </Col>
