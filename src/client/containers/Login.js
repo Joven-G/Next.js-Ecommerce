@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, ControlLabel, FormControl, FormGroup, Grid, Row, Col} from 'react-bootstrap';
+import { Button, ControlLabel, FormControl, FormGroup, Tabs, Tab} from 'react-bootstrap';
 import { inject, observer } from 'mobx-react';
 
 import Layout from '../components/Layout';
@@ -101,10 +101,10 @@ export default class Login extends React.Component {
               width: 30%;
             }
           `}</style>
- <Layout>
-          <Grid>
-            <Row>
-              <Col>
+        <Layout>
+          <p />
+          <Tabs >
+            <Tab eventKey={1} title="Login">
                 <p />
                 <h1>Login</h1>
                 <form className="formLogin">
@@ -124,8 +124,8 @@ export default class Login extends React.Component {
                       Entrar
                      </Button>
                 </form>
-              </Col>
-              <Col>
+              </Tab>
+            <Tab eventKey={2} title="Novo Cliente">
                 <p />
                 <h1>Cadastro Cliente</h1>
                <form className="formCadastroCliente">
@@ -134,6 +134,30 @@ export default class Login extends React.Component {
                      {this.state.cpfTitle}
                    </ControlLabel>
                    <FormControl inputRef={(ref) => { this.cpf = ref; }} type="text" placeholder="Usuario" />
+                 </FormGroup>
+                 <FormGroup>
+                   <ControlLabel>
+                        Nome
+                      </ControlLabel>
+                   <FormControl type="text" inputRef={(ref) => { this.nome = ref; }} />
+                 </FormGroup>
+                 <FormGroup>
+                   <ControlLabel>
+                        Telefone
+                      </ControlLabel>
+                   <FormControl type="text" inputRef={(ref) => { this.telefone = ref; }} />
+                 </FormGroup>
+                 <FormGroup>
+                   <ControlLabel>
+                        Endereco
+                      </ControlLabel>
+                   <FormControl type="text" inputRef={(ref) => { this.endereco = ref; }} />
+                 </FormGroup>
+                 <FormGroup>
+                   <ControlLabel>
+                        CEP
+                      </ControlLabel>
+                   <FormControl type="text" inputRef={(ref) => { this.cep = ref; }} />
                  </FormGroup>
                  <FormGroup>
                    <ControlLabel>
@@ -151,9 +175,8 @@ export default class Login extends React.Component {
                      Cadastrar e Entrar
                     </Button>
                </form>
-              </Col>
-            </Row>
-          </Grid>
+            </Tab>
+          </Tabs>
         </Layout>
       </div>
     );
