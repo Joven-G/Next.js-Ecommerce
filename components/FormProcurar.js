@@ -19,6 +19,7 @@ export default class FormProcurar extends React.Component {
 
   handleSubmit(e) {
       var string = document.getElementById('formBasicText').value;
+      alert(string);
   }
 
   render() {
