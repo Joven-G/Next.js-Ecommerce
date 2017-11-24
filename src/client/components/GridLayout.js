@@ -11,6 +11,12 @@ export default class GridLayout extends React.Component {
   adicionarCarrinho = (produto) => {
     const { store } = this.props;
 
+    if(produto.stock==0)
+    {
+        store.snackbar = { active: true, message: 'PRODUTO FORA DE ESTOQUE', success: false };
+        return;
+    }
+
     if (store.carrinho.produtos[produto._id]) {
       store.carrinho.produtos[produto._id].quantidade += 1;
     } else {
@@ -51,7 +57,7 @@ export default class GridLayout extends React.Component {
                     />
 
                     <h3>{produto.name}</h3>
-                    <p>{produto.description}</p>
+                    <p>Qtd: {produto.stock}</p>
                     <p>
                       <Button primary onClick={() => this.adicionarCarrinho(produto)}>Adicionar ao carrinho</Button>&nbsp;
                       <Button as={Link} to={`/produto/${produto._id}`}>Detalhes</Button>
