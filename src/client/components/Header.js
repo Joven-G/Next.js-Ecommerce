@@ -58,7 +58,7 @@ export default class Header extends React.Component {
       NavLogin = (
         <Nav pullRight>
           <NavItem eventKey={2} href="/login">
-                    Login
+                    Login/Cadastro
                   </NavItem>
         </Nav>
               );
