@@ -70,7 +70,7 @@ export default class Header extends React.Component {
         <Navbar fluid>
           <Navbar.Header>
             <Navbar.Brand>
-              <a href="/">E-Commerce</a>
+              <a href="/">SINDO STORE</a>
             </Navbar.Brand>
           </Navbar.Header>
           <Nav>
