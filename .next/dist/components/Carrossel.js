@@ -4,23 +4,23 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _getPrototypeOf = require("next\\node_modules\\babel-runtime/core-js/object/get-prototype-of");
+var _getPrototypeOf = require("next/node_modules/babel-runtime/core-js/object/get-prototype-of");
 
 var _getPrototypeOf2 = _interopRequireDefault(_getPrototypeOf);
 
-var _classCallCheck2 = require("next\\node_modules\\babel-runtime/helpers/classCallCheck");
+var _classCallCheck2 = require("next/node_modules/babel-runtime/helpers/classCallCheck");
 
 var _classCallCheck3 = _interopRequireDefault(_classCallCheck2);
 
-var _createClass2 = require("next\\node_modules\\babel-runtime/helpers/createClass");
+var _createClass2 = require("next/node_modules/babel-runtime/helpers/createClass");
 
 var _createClass3 = _interopRequireDefault(_createClass2);
 
-var _possibleConstructorReturn2 = require("next\\node_modules\\babel-runtime/helpers/possibleConstructorReturn");
+var _possibleConstructorReturn2 = require("next/node_modules/babel-runtime/helpers/possibleConstructorReturn");
 
 var _possibleConstructorReturn3 = _interopRequireDefault(_possibleConstructorReturn2);
 
-var _inherits2 = require("next\\node_modules\\babel-runtime/helpers/inherits");
+var _inherits2 = require("next/node_modules/babel-runtime/helpers/inherits");
 
 var _inherits3 = _interopRequireDefault(_inherits2);
 
@@ -32,7 +32,7 @@ var _reactBootstrap = require("react-bootstrap");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _jsxFileName = "C:\\Users\\Akari\\Desktop\\mc437-ecommerce\\components\\Carrossel.js";
+var _jsxFileName = "/home/pchinen/git/mc437-ecommerce/components/Carrossel.js";
 
 
 var Carrossel = function (_React$Component) {
@@ -52,12 +52,11 @@ var Carrossel = function (_React$Component) {
           fileName: _jsxFileName,
           lineNumber: 7
         }
-      }, _react2.default.createElement(_reactBootstrap.Carousel.Item, {
-        __source: {
+      }, _react2.default.createElement(_reactBootstrap.Carousel.Item, { bsClass: "carousel-promo", __source: {
           fileName: _jsxFileName,
           lineNumber: 8
         }
-      }, _react2.default.createElement("img", { width: 800, height: 800, alt: "PROMO", src: "/static/promocao.jpg", __source: {
+      }, _react2.default.createElement("img", { "class": "img-carousel", alt: "PROMO", src: "/static/promocao.jpg", __source: {
           fileName: _jsxFileName,
           lineNumber: 9
         }
@@ -76,12 +75,11 @@ var Carrossel = function (_React$Component) {
           fileName: _jsxFileName,
           lineNumber: 12
         }
-      }, "Nulla vitae elit libero, a pharetra augue mollis interdum."))), _react2.default.createElement(_reactBootstrap.Carousel.Item, {
-        __source: {
+      }, "Nulla vitae elit libero, a pharetra augue mollis interdum."))), _react2.default.createElement(_reactBootstrap.Carousel.Item, { bsClass: "carousel-promo", __source: {
           fileName: _jsxFileName,
           lineNumber: 15
         }
-      }, _react2.default.createElement("img", { width: 800, height: 800, alt: "450x250", src: "/static/promo.jpg", __source: {
+      }, _react2.default.createElement("img", { "class": "img-carousel", alt: "450x250", src: "/static/Promocao-banner.png", __source: {
           fileName: _jsxFileName,
           lineNumber: 16
         }
@@ -100,12 +98,11 @@ var Carrossel = function (_React$Component) {
           fileName: _jsxFileName,
           lineNumber: 19
         }
-      }, "Lorem ipsum dolor sit amet, consectetur adipiscing elit."))), _react2.default.createElement(_reactBootstrap.Carousel.Item, {
-        __source: {
+      }, "Lorem ipsum dolor sit amet, consectetur adipiscing elit."))), _react2.default.createElement(_reactBootstrap.Carousel.Item, { bsClass: "carousel-promo", __source: {
           fileName: _jsxFileName,
           lineNumber: 22
         }
-      }, _react2.default.createElement("img", { width: 800, height: 800, alt: "450x250", src: "/static/promo.jpg", __source: {
+      }, _react2.default.createElement("img", { "class": "img-carousel", alt: "450x250", src: "/static/promo.jpg", __source: {
           fileName: _jsxFileName,
           lineNumber: 23
         }
@@ -132,4 +129,4 @@ var Carrossel = function (_React$Component) {
 }(_react2.default.Component);
 
 exports.default = Carrossel;
-//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbXBvbmVudHNcXENhcnJvc3NlbC5qcyJdLCJuYW1lcyI6WyJDYXJvdXNlbCIsIkNhcnJvc3NlbCIsIlJlYWN0IiwiQ29tcG9uZW50Il0sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7QUFBQSxBQUFTOzs7Ozs7O0ksQUFFWTs7Ozs7Ozs7Ozs7NkJBRVIsQUFDTDs2QkFDTixBQUFDOztvQkFBRDtzQkFBQSxBQUNFO0FBREY7QUFBQSxPQUFBLGtCQUNHLGNBQUQseUJBQUEsQUFBVTs7b0JBQVY7c0JBQUEsQUFDRTtBQURGO0FBQUEsZ0RBQ08sT0FBTCxBQUFZLEtBQUssUUFBakIsQUFBeUIsS0FBSyxLQUE5QixBQUFrQyxTQUFRLEtBQTFDLEFBQThDO29CQUE5QztzQkFERixBQUNFLEFBQ0E7QUFEQTswQkFDQyxjQUFELHlCQUFBLEFBQVU7O29CQUFWO3NCQUFBLEFBQ0U7QUFERjtBQUFBLHlCQUNFLGNBQUE7O29CQUFBO3NCQUFBO0FBQUE7QUFBQSxTQURGLEFBQ0UsQUFDQSxzQ0FBQSxjQUFBOztvQkFBQTtzQkFBQTtBQUFBO0FBQUEsU0FMTixBQUNFLEFBRUUsQUFFRSxBQUdKLGlGQUFDLGNBQUQseUJBQUEsQUFBVTs7b0JBQVY7c0JBQUEsQUFDRTtBQURGO0FBQUEsZ0RBQ08sT0FBTCxBQUFZLEtBQUssUUFBakIsQUFBeUIsS0FBSyxLQUE5QixBQUFrQyxXQUFVLEtBQTVDLEFBQWdEO29CQUFoRDtzQkFERixBQUNFLEFBQ0E7QUFEQTswQkFDQyxjQUFELHlCQUFBLEFBQVU7O29CQUFWO3NCQUFBLEFBQ0U7QUFERjtBQUFBLHlCQUNFLGNBQUE7O29CQUFBO3NCQUFBO0FBQUE7QUFBQSxTQURGLEFBQ0UsQUFDQSx1Q0FBQSxjQUFBOztvQkFBQTtzQkFBQTtBQUFBO0FBQUEsU0FaTixBQVFFLEFBRUUsQUFFRSxBQUdKLCtFQUFDLGNBQUQseUJBQUEsQUFBVTs7b0JBQVY7c0JBQUEsQUFDRTtBQURGO0FBQUEsZ0RBQ08sT0FBTCxBQUFZLEtBQUssUUFBakIsQUFBeUIsS0FBSyxLQUE5QixBQUFrQyxXQUFVLEtBQTVDLEFBQWdEO29CQUFoRDtzQkFERixBQUNFLEFBQ0E7QUFEQTswQkFDQyxjQUFELHlCQUFBLEFBQVU7O29CQUFWO3NCQUFBLEFBQ0U7QUFERjtBQUFBLHlCQUNFLGNBQUE7O29CQUFBO3NCQUFBO0FBQUE7QUFBQSxTQURGLEFBQ0UsQUFDQSxzQ0FBQSxjQUFBOztvQkFBQTtzQkFBQTtBQUFBO0FBQUEsU0FwQkEsQUFDTixBQWVFLEFBRUUsQUFFRSxBQUtQOzs7OztFQTVCc0MsZ0JBQU0sQTs7a0JBQXhCLEEiLCJmaWxlIjoiQ2Fycm9zc2VsLmpzIiwic291cmNlUm9vdCI6IkM6L1VzZXJzL0FrYXJpL0Rlc2t0b3AvbWM0MzctZWNvbW1lcmNlIn0=
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImNvbXBvbmVudHMvQ2Fycm9zc2VsLmpzIl0sIm5hbWVzIjpbIkNhcm91c2VsIiwiQ2Fycm9zc2VsIiwiUmVhY3QiLCJDb21wb25lbnQiXSwibWFwcGluZ3MiOiI7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztBQUFBLEFBQVM7Ozs7Ozs7SSxBQUVZOzs7Ozs7Ozs7Ozs2QkFFUixBQUNMOzZCQUNOLEFBQUM7O29CQUFEO3NCQUFBLEFBQ0U7QUFERjtBQUFBLE9BQUEsa0JBQ0csY0FBRCx5QkFBQSxBQUFVLFFBQU0sU0FBaEIsQUFBd0I7b0JBQXhCO3NCQUFBLEFBQ0U7QUFERjtnREFDTyxTQUFMLEFBQVcsZ0JBQWUsS0FBMUIsQUFBOEIsU0FBUSxLQUF0QyxBQUEwQztvQkFBMUM7c0JBREYsQUFDRSxBQUNBO0FBREE7MEJBQ0MsY0FBRCx5QkFBQSxBQUFVOztvQkFBVjtzQkFBQSxBQUNFO0FBREY7QUFBQSx5QkFDRSxjQUFBOztvQkFBQTtzQkFBQTtBQUFBO0FBQUEsU0FERixBQUNFLEFBQ0Esc0NBQUEsY0FBQTs7b0JBQUE7c0JBQUE7QUFBQTtBQUFBLFNBTE4sQUFDRSxBQUVFLEFBRUUsQUFHSixpRkFBQyxjQUFELHlCQUFBLEFBQVUsUUFBTSxTQUFoQixBQUF3QjtvQkFBeEI7c0JBQUEsQUFDRTtBQURGO2dEQUNPLFNBQUwsQUFBVyxnQkFBZSxLQUExQixBQUE4QixXQUFVLEtBQXhDLEFBQTRDO29CQUE1QztzQkFERixBQUNFLEFBQ0E7QUFEQTswQkFDQyxjQUFELHlCQUFBLEFBQVU7O29CQUFWO3NCQUFBLEFBQ0U7QUFERjtBQUFBLHlCQUNFLGNBQUE7O29CQUFBO3NCQUFBO0FBQUE7QUFBQSxTQURGLEFBQ0UsQUFDQSx1Q0FBQSxjQUFBOztvQkFBQTtzQkFBQTtBQUFBO0FBQUEsU0FaTixBQVFFLEFBRUUsQUFFRSxBQUdKLCtFQUFDLGNBQUQseUJBQUEsQUFBVSxRQUFNLFNBQWhCLEFBQXdCO29CQUF4QjtzQkFBQSxBQUNFO0FBREY7Z0RBQ08sU0FBTCxBQUFXLGdCQUFlLEtBQTFCLEFBQThCLFdBQVUsS0FBeEMsQUFBNEM7b0JBQTVDO3NCQURGLEFBQ0UsQUFDQTtBQURBOzBCQUNDLGNBQUQseUJBQUEsQUFBVTs7b0JBQVY7c0JBQUEsQUFDRTtBQURGO0FBQUEseUJBQ0UsY0FBQTs7b0JBQUE7c0JBQUE7QUFBQTtBQUFBLFNBREYsQUFDRSxBQUNBLHNDQUFBLGNBQUE7O29CQUFBO3NCQUFBO0FBQUE7QUFBQSxTQXBCQSxBQUNOLEFBZUUsQUFFRSxBQUVFLEFBS1A7Ozs7O0VBNUJzQyxnQkFBTSxBOztrQkFBeEIsQSIsImZpbGUiOiJDYXJyb3NzZWwuanMiLCJzb3VyY2VSb290IjoiL2hvbWUvcGNoaW5lbi9naXQvbWM0MzctZWNvbW1lcmNlIn0=

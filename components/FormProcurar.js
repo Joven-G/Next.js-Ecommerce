@@ -17,40 +17,23 @@ import { Form } from 'react-bootstrap'
 
 export default class FormProcurar extends React.Component {
 
-  state = {
-    value: ''
-  }
-
-  getValidationState() {
-    const length = this.state.value.length;
-    if (length > 3) return 'success';
-    else if (length > 2) return 'warning';
-    else if (length > 0) return 'error';
-    return null;
-  }
-
-  handleChange(e) {
-    this.setState({ value: e.target.value });
+  handleSubmit(e) {
+      var string = document.getElementById('formBasicText').value;
+      alert(string);
   }
 
   render() {
     return (
       <Navbar.Form>
         <FormGroup
-          controlId="formBasicText"
-          validationState={this.getValidationState()}
-        >
+          controlId="formBasicText" >
           <FormControl
             type="text"
-            value={this.state.value}
             placeholder="Procurar Produtos"
-            onChange={this.handleChange}
           />
           {' '}
-        <Button type="submit">Procurar</Button>
+        <Button type="submit" onClick={this.handleSubmit}>Procurar</Button>
         </FormGroup>
-
-
       </Navbar.Form>
     );
   }
